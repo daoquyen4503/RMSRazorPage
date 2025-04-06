@@ -38,7 +38,7 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Category.Name)
+                @Html.DisplayNameFor(model => model.MenuItem[0].Category.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)

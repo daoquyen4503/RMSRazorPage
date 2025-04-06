@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using RMSRazorPage.Models;
 
 namespace RMSRazorPage.Data
 {
-    public class ApplicationDbContext : DbContext
+    // Kế thừa từ IdentityDbContext để tích hợp Identity
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -28,6 +26,10 @@ namespace RMSRazorPage.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // Cần gọi base.OnModelCreating để cấu hình Identity được thực hiện
+            base.OnModelCreating(modelBuilder);
+
+            // Cấu hình độ chính xác cho các trường decimal
             modelBuilder.Entity<MenuItem>()
                 .Property(m => m.Price)
                 .HasPrecision(18, 2);
@@ -40,7 +42,5 @@ namespace RMSRazorPage.Data
                 .Property(p => p.Amount)
                 .HasPrecision(18, 2);
         }
-
-
     }
 }

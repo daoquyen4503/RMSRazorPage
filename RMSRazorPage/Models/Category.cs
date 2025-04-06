@@ -14,6 +14,9 @@ namespace RMSRazorPage.Models
         public string Description { get; set; }
 
         // Navigation
-        public ICollection<MenuItem> MenuItems { get; set; }
+        public ICollection<MenuItem> MenuItems { get; set; } = new List<MenuItem>();
+
+
+
     }
 }
